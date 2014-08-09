@@ -41,4 +41,4 @@ RtBot was written to run in Python 2.7 and you will need the following packages:
 ## Shoutouts:
 
 * [NetFlixBot] (https://github.com/alanwright/netflixbot)
-* [Lot of Reddit Bots] (https://github.com/alanwright/netflixbot)
+* [Lot of Reddit Bots] (https://github.com/voussoir/reddit)
