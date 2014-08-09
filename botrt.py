@@ -18,7 +18,7 @@ SUBREDDIT = []
 #This is the word you want to put in reply
 MAXPOSTS = 100
 #This is how many posts you want to retrieve all at once. PRAW can download 100 at a time.
-WAIT = 60
+WAIT = 30
 #This is how many seconds you will wait between cycles. The bot is completely inactive during this time.
 
 try:
@@ -164,6 +164,8 @@ def build_reply(minput):
     Flag=True
     rt=rottentomatoes.RT()
 
+    print('Movie Found: "' + minput[0] + '".')
+
     try:
         mov=rt.search(minput[0], page_limit=1)
 
@@ -172,14 +174,14 @@ def build_reply(minput):
                 text += ('* ' + mov[0]['title'] + ' - Rotten Tomatoes Score: ' + str(0) + '%\n')
             text += ('* ' + mov[0]['title'] + ' - Rotten Tomatoes Score: ' + str(mov[0]['ratings']['critics_score']) + '%\n')
         else:
-            text += ('* ' + minput + 'not found\n')
+            text += ('* ' + minput[0] + 'not found\n')
 
     except urllib2.HTTPError, err:
         # 400 error code generally means invalid query structure
         if err.code == 400:
             print 'Something went wrong with the query:'
             print minput
-        text += '* ' + minput + ' not found or Rotten Tomatoes is down\n'
+        text += '* ' + minput[0] + ' not found or Rotten Tomatoes is down\n'
 
     text += '\n\n' + ('_' * 25) + '\n'
 
@@ -189,15 +191,16 @@ def add_signature(text):
     text += 'NOTE: BOT IS IN BETA!! Availability not guaranteed\n\n'
     text += 'How to use botrt. (/u/botrt <Movie Name> eg: /u/botrt The Matrix)\n\n'
     text += '*Note: Titles or names must match exactly, but capitalization does not matter.*\n\n'
-    text += "PM for Feedback /u/kingk89 | This bot uses the [Rotten Tomatoes API](http://developer.rottentomatoes.com/)"
+    text += "PM for Feedback /u/kingk89 | [Source](https://github.com/harvinb/botrt) | This bot uses the [Rotten Tomatoes API](http://developer.rottentomatoes.com/)"
     return text
 
 #replies to given comment
 def replyto(c, text):
     now = datetime.datetime.now()
+    c.reply(text)
     print 'ID:', c.id, 'Author:', c.author.name, 'r/' + str(c.subreddit.display_name), 'Title:', c.submission.title
     print now.strftime("%m-%d-%Y %H:%M"), '\n'
-    c.reply(text)
+
     #print text
 
 #call main function

@@ -24,9 +24,13 @@ or
 
 ## Current Subreddits
 
-* NIL
+* In testing
 
 *If you would like specific functionality for your subreddit, please reach out to me.*
+
+## TODO/Issues
+* When database is deleted bot reposts on all calls
+* Certain move names are wrong (eg: search: blade get: blades of glory) //Issue with RT API
 
 ## Source Code
 RtBot was written to run in Python 2.7 and you will need the following packages:
